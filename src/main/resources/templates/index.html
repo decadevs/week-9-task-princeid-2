@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+    <title>Employee Management System</title>
+</head>
+<body>
+
+<nav>
+    <div class="nav-wrapper container">
+        <a href="#" class="brand-logo">Switch<span style="font-style: italic">On</span></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">JavaScript</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h5 class="h5-header">Employee List <span><a th:href="@{/showNewEmployeeForm}" class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">add</i></a></span></h5>
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Department</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="employee : ${listEmployees}">
+            <td th:text="${employee.getFirstName()}"></td>
+            <td th:text="${employee.getLastName()}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.gender}"></td>
+            <td th:text="${employee.address}"></td>
+            <td th:text="${employee.department}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<!-- Modal Trigger -->
+<a data-target="modal1" class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+<!-- Modal Trigger -->
+<button data-target="modal1" class="btn modal-trigger">Modal</button>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
+
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>M.AutoInit();</script>
+</body>
+</html>
