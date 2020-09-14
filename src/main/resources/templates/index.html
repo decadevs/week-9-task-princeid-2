@@ -22,7 +22,8 @@
 </nav>
 
 <div class="container">
-    <h5 class="h5-header">Employee List <span><a th:href="@{/showNewEmployeeForm}" class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">add</i></a></span></h5>
+<!--    -->
+    <h5 class="h5-header">Employee List <span><a data-target="modal1" th:href="@{/}" class="btn-floating btn-large modal-trigger waves-effect waves-light"><i class="material-icons">add</i></a></span></h5>
     <table class="highlight">
         <thead>
         <tr>
@@ -32,6 +33,7 @@
             <th>Gender</th>
             <th>Address</th>
             <th>Department</th>
+            <th>Actions</th>
         </tr>
         </thead>
 
@@ -43,26 +45,67 @@
             <td th:text="${employee.gender}"></td>
             <td th:text="${employee.address}"></td>
             <td th:text="${employee.department}"></td>
+            <td><span><a class="waves-effect waves-light btn-small action">Update</a><a class="waves-effect waves-light btn-small">Delete</a></span></td>
         </tr>
         </tbody>
     </table>
 
 </div>
 
-<!-- Modal Trigger -->
-<a data-target="modal1" class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-
-<!-- Modal Trigger -->
-<button data-target="modal1" class="btn modal-trigger">Modal</button>
-
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
     <div class="modal-content">
-        <h4>Modal Header</h4>
-        <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        <h5>Add New Employee</h5>
+        <div class="row form">
+            <form action="#" th:action="@{/saveEmployee}" th:object="${employee}" method="post" class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="first_name" type="text" th:field = "*{firstName}" class="validate">
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" th:field = "*{lastName}" class="validate">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                            <input id="email" type="email" th:field = "*{email}" class="validate">
+                            <label for="email">Email</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="password" type="password" th:field = "*{password}" class="validate">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <select th:field = "*{gender}">
+                            <option value="" disabled selected>Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <label>Gender</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="address" type="text" th:field = "*{address}" class="validate">
+                        <label for="address">Address</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="department" type="text" th:field = "*{department}" class="validate">
+                        <label for="department">Department</label>
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Add
+                    <i class="material-icons right"></i>
+                </button>
+
+            </form>
+        </div>
     </div>
 </div>
 

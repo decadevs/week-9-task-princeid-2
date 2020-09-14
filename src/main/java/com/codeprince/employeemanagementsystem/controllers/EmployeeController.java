@@ -5,6 +5,8 @@ import com.codeprince.employeemanagementsystem.services.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class EmployeeController {
@@ -18,7 +20,9 @@ public class EmployeeController {
     //Display the list of employees
     @GetMapping("/")
     public String viewHomePage(Model model) {
+        Employee employee = new Employee();
         model.addAttribute("listEmployees", employeeService.getAllEmployees());
+        model.addAttribute("employee", employee);
         return "index";
     }
 
@@ -28,7 +32,13 @@ public class EmployeeController {
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
         return "add-employee";
+    }
 
+    @PostMapping("/saveEmployee")
+    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
+        // Save Employee to the database
+        employeeService.saveEmployee(employee);
+        return "redirect:/";
     }
 
 }
