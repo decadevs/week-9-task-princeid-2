@@ -22,45 +22,12 @@
 </nav>
 
 <div class="container">
-<!--    -->
-    <h5 class="h5-header">Employee List <span><a data-target="modal1" th:href="@{/}" class="btn-floating btn-large modal-trigger waves-effect waves-light"><i class="material-icons">add</i></a></span></h5>
-    <table class="highlight">
-        <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>Address</th>
-            <th>Department</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
 
-        <tbody>
-        <tr th:each="employee : ${listEmployees}">
-            <td th:text="${employee.getFirstName()}"></td>
-            <td th:text="${employee.getLastName()}"></td>
-            <td th:text="${employee.email}"></td>
-            <td th:text="${employee.gender}"></td>
-            <td th:text="${employee.address}"></td>
-            <td th:text="${employee.department}"></td>
-            <td>
-                <a th:href="@{/showUpdateForm/{id}(id=${employee.id})}" class="waves-effect waves-light btn-small action update">Update</a>
-                <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="waves-effect waves-light btn-small action delete">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-</div>
-
-<!-- Modal Structure -->
-<div id="modal1" class="modal">
-    <div class="modal-content">
-        <h5>Add New Employee</h5>
+    <div>
+        <h5>Update Employee</h5>
         <div class="row form">
             <form action="#" th:action="@{/saveEmployee}" th:object="${employee}" method="post" class="col s12">
+                <input type="hidden" th:field = "*{id}">
                 <div class="row">
                     <div class="input-field col s6">
                         <input id="first_name" type="text" th:field = "*{firstName}" class="validate">
@@ -73,8 +40,8 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                            <input id="email" type="email" th:field = "*{email}" class="validate">
-                            <label for="email">Email</label>
+                        <input id="email" type="email" th:field = "*{email}" class="validate">
+                        <label for="email">Email</label>
                     </div>
                     <div class="input-field col s6">
                         <input id="password" type="password" th:field = "*{password}" class="validate">
@@ -103,7 +70,7 @@
                         <label for="department">Department</label>
                     </div>
                 </div>
-                <button class="btn waves-effect waves-light" type="submit" name="action">Add
+                <button class="btn waves-effect waves-light" type="submit" name="action">Update
                     <i class="material-icons right"></i>
                 </button>
 

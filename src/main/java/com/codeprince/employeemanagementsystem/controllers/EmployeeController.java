@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -23,21 +24,41 @@ public class EmployeeController {
         Employee employee = new Employee();
         model.addAttribute("listEmployees", employeeService.getAllEmployees());
         model.addAttribute("employee", employee);
+//        model.addAttribute("isAdd", true);
         return "index";
-    }
-
-    @GetMapping("showNewEmployeeForm")
-    public String showNewEmployeeForm(Model model) {
-        // Create model attribute to bind form data
-        Employee employee = new Employee();
-        model.addAttribute("employee", employee);
-        return "add-employee";
     }
 
     @PostMapping("/saveEmployee")
     public String saveEmployee(@ModelAttribute("employee") Employee employee) {
         // Save Employee to the database
         employeeService.saveEmployee(employee);
+        return "redirect:/";
+    }
+
+    @GetMapping("/showUpdateForm/{id}")
+    public String showUpdateForm(@PathVariable (value = "id") long id, Model model) {
+        // Get employee by Id from the service
+        Employee employee = employeeService.getEmployeeById(id);
+
+        // Set the retrieved employee object to the model to prepopulate the form
+        model.addAttribute("employee", employee);
+//        model.addAttribute("isAdd", false);
+        return "update_employee";
+    }
+
+    @PostMapping("/updateEmployee")
+    public String updateEmployee(@ModelAttribute("employee") Employee employee) {
+        System.out.println("ENTERED HERE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>+++++++++++??????????????????");
+        // Save Employee to the database
+        employeeService.saveEmployee(employee);
+        return "redirect:/";
+    }
+
+    @GetMapping("/deleteEmployee/{id}")
+    public String deleteEmployee(@PathVariable (value = "id") long id) {
+
+        // Call delete employee method from the employee service
+         employeeService.deleteEmployeeById(id);
         return "redirect:/";
     }
 
