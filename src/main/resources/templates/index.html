@@ -53,6 +53,29 @@
         </tbody>
     </table>
 
+    <div th:if = "${totalPages > 1}">
+        <div class="row col s10">
+            <div class="col s2">
+                Total Rows: [[${totalItems}]]
+            </div>
+            <div class="col s1">
+                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+                    <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                </span>
+            </div>
+            <div class="col s1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
+            <div class="col s1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
 <!-- Modal Structure -->
@@ -85,8 +108,8 @@
                     <div class="input-field col s6">
                         <select th:field = "*{gender}">
                             <option value="" disabled selected>Gender</option>
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
+                            <option value="M">M</option>
+                            <option value="F">F</option>
                         </select>
                         <label>Gender</label>
                     </div>

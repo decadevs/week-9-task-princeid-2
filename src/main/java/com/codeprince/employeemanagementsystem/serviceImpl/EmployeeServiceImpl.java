@@ -3,6 +3,9 @@ package com.codeprince.employeemanagementsystem.serviceImpl;
 import com.codeprince.employeemanagementsystem.models.Employee;
 import com.codeprince.employeemanagementsystem.repositories.EmployeeRepository;
 import com.codeprince.employeemanagementsystem.services.EmployeeService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,5 +46,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteEmployeeById(long id) {
         employeeRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Employee> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return employeeRepository.findAll(pageable);
     }
 }
