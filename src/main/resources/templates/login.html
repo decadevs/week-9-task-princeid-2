@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" th:href="@{/style.css}" type="text/css">
+    <title>Login</title>
+</head>
+<body>
+
+<nav>
+    <div class="nav-wrapper container">
+        <a href="#" class="brand-logo">Switch<span style="font-style: italic">On</span></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">JavaScript</a></li>
+            <li><a href="#" th:href="@{/}">Registration and Login Module</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <div>
+        <div class="row form">
+
+            <!--            Error Message-->
+            <div th:if="${param.error}">
+                <div class="error-message">Invalid username or password</div>
+            </div>
+
+            <!--            Logout Message-->
+            <div th:if="${param.logout}">
+                <div class="logout-message">You've been logged out</div>
+            </div>
+
+            <h5>Login</h5>
+            <form action="#" th:action="@{/login}" method="post" class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="username" type="text" name="username" required autofocus="autofocus" class="validate">
+                        <label for="username">Username</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="password" type="password" name="password" required autofocus="autofocus" class="validate">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light" type="submit" id="login-submit" name="login-submit">Login
+                    <i class="material-icons right"></i>
+                </button>
+
+                <!--         For Registration, if need be-->
+                <span>New User? <a href="/" th:href="@{/registration}">Register here</a></span>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>M.AutoInit();</script>
+</body>
+</html>

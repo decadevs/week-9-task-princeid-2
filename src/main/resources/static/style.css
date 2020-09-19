@@ -65,6 +65,11 @@ input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-def
     color: white;
 }
 
+.success-message {
+    margin-top: 20px;
+    color: aquamarine;
+}
+
 /*.input-field:focus {*/
 /*    border-bottom-color: #f17e30 !important;*/
 /*}*/
