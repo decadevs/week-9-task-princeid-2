@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <!-- Compiled and minified CSS -->
@@ -14,9 +15,8 @@
     <div class="nav-wrapper container">
         <a href="#" class="brand-logo">Switch<span style="font-style: italic">On</span></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">JavaScript</a></li>
+            <li>Admin: <span sec:authentication="principal.username"></span></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
         </ul>
     </div>
 </nav>
@@ -94,21 +94,21 @@
             <form action="#" th:action="@{/saveEmployee}" th:object="${employee}" method="post" class="col s12">
                 <div class="row">
                     <div class="input-field col s6">
-                        <input id="first_name" type="text" th:field = "*{firstName}" class="validate">
+                        <input id="first_name" type="text" th:field = "*{firstName}" required autofocus="autofocus" class="validate">
                         <label for="first_name">First Name</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="last_name" type="text" th:field = "*{lastName}" class="validate">
+                        <input id="last_name" type="text" th:field = "*{lastName}" required autofocus="autofocus" class="validate">
                         <label for="last_name">Last Name</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                            <input id="email" type="email" th:field = "*{email}" class="validate">
+                            <input id="email" type="email" th:field = "*{email}" required autofocus="autofocus" class="validate">
                             <label for="email">Email</label>
                     </div>
                     <div class="input-field col s6">
-                        <input id="password" type="password" th:field = "*{password}" class="validate">
+                        <input id="password" type="password" th:field = "*{password}" required autofocus="autofocus" class="validate">
                         <label for="password">Password</label>
                     </div>
                 </div>
@@ -124,13 +124,15 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="address" type="text" th:field = "*{address}" class="validate">
+                        <input id="address" type="text" th:field = "*{address}" required autofocus="autofocus" class="validate">
                         <label for="address">Address</label>
                     </div>
                 </div>
+
+<!--                 TODO: Change department to select-->
                 <div class="row">
                     <div class="input-field col s12">
-                        <input id="department" type="text" th:field = "*{department}" class="validate">
+                        <input id="department" type="text" th:field = "*{department}" required autofocus="autofocus" class="validate">
                         <label for="department">Department</label>
                     </div>
                 </div>
